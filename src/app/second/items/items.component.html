@@ -1,0 +1,31 @@
+<div *ngIf ="items?.length> 0;else noItems">
+<ul *ngFor ="let item of items" class ="collection"> 
+    <li class="collection-item">
+       
+        <span *ngIf= "! item.editState" >
+            <strong>{{item.title}}: </strong> {{item.description}} 
+        </span>
+
+      <span *ngIf= " item.editState">
+          <input type="text" placeholder="edit title"  [(ngModel)]="item.title"/>
+          <input type = "text" placeholder="edit descreption" [(ngModel)] = "item.description"/>
+
+
+      </span>  
+      
+        <button *ngIf= "! item.editState"  (click)="editItem(item)"><i  class="fa fa-pencil"></i>  </button>
+        <button  *ngIf=" item.editState" (click)="editItem(item)"> <i class="fa fa-compress"></i>  </button>
+        <button  *ngIf=" item.editState" (click)="updateItem(item)"> <i class="fa fa-floppy-o"> </i>  </button>
+        <button  (click)="deleteItem(item)"> <i class="fa fa-trash" style="float:right"> </i> trash </button>
+        
+
+
+        <!-- </form> -->
+      
+</ul>
+</div>
+
+<ng-template #noItems>
+    <hr>
+    <h5>There is no items to list</h5>
+</ng-template>
